@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="22cad982aea44aabaf21338bec274872" Name="Diagram1">
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.AddressTypeTable" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.DiscountTable" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.GenderTable" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.OrderDealDetailTable" Width="1.5" PointX="10.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.OrderItemDetailTable" Width="1.5" PointX="7.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.OrderStatusTable" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.OrderTable" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.OrderTypeTable" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.ReservationStatusTable" Width="1.5" PointX="6" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.StcokDealTable" Width="1.5" PointX="8.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.StockDealDetailTable" Width="1.5" PointX="13.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.StockItemCategoryTable" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.StockItemIngredientTable" Width="1.5" PointX="7.5" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.StockItemTable" Width="1.5" PointX="5.25" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.StockMenuCategoryTable" Width="1.5" PointX="9" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.StockMenuItemTable" Width="1.5" PointX="11.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.TableReservationTable" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.UserAddressTable" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.UserStatusTable" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.UserTable" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.UserTypeTable" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.VisibleStatusTable" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserAddressTable_AddressTypeTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_OrderItemDetailTable_DiscountTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserTable_GenderTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_OrderDealDetailTable_OrderTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_OrderDealDetailTable_StcokDealTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_OrderItemDetailTable_OrderTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_OrderItemDetailTable_StockItemTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_OrderTable_OrderStatusTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_OrderTable_OrderTypeTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_OrderTable_UserAddressTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_OrderTable_UserTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_StockItemTable_OrderTypeTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_TableReservationTable_ReservationStatusTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_StcokDealTable_VisibleStatusTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_StockDealDetailTable_StcokDealTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_StockDealDetailTable_StockItemTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_StockDealDetailTable_VisibleStatusTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_StockItemCategoryTable_VisibleStatusTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_StockItemTable_StockItemCategoryTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_StockItemIngredientTable_StockItemTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_StockItemTable_VisibleStatusTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_StockMenuItemTable_StockItemTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_StockMenuItemTable_StockMenuCategoryTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_StockMenuItemTable_VisibleStatusTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_TableReservationTable_Process_UserTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_TableReservationTable_UserTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserAddressTable_UserTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserAddressTable_VisibleStatusTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserTable_UserStatusTable" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserTable_UserTypeTable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.UserDetailTable" Width="1.5" PointX="5.25" PointY="28.375" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserDetailTable_UserTable" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
