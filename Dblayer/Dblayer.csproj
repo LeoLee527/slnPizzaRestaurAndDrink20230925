@@ -126,6 +126,9 @@
     <Compile Include="UserDetailTable.cs">
       <DependentUpon>PizzaRestaurantDrinkDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserPasswordRecoveryTable.cs">
+      <DependentUpon>PizzaRestaurantDrinkDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserStatusTable.cs">
       <DependentUpon>PizzaRestaurantDrinkDbModel.tt</DependentUpon>
     </Compile>

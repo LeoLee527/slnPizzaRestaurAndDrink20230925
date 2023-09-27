@@ -11,6 +11,7 @@
           </Key>
           <Property Name="AddressTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AddressType" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="CreatedBy_UserID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DiscountTable">
           <Key>
@@ -213,6 +214,17 @@
           <Property Name="EducationLastDegreePhotoPath" Type="varchar" MaxLength="500" />
           <Property Name="ExperenceLastPhoto" Type="varchar" MaxLength="500" />
           <Property Name="CreatedBy_UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserPasswordRecoveryTable">
+          <Key>
+            <PropertyRef Name="UserPasswordRecoveryID" />
+          </Key>
+          <Property Name="UserPasswordRecoveryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RecoveryCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RecoveryCodeExpiryDateTime" Type="datetime" Nullable="false" />
+          <Property Name="RecoveryStatus" Type="bit" Nullable="false" />
+          <Property Name="OldPassword" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="UserStatusTable">
           <Key>
@@ -588,6 +600,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserPasswordRecoveryTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="UserPasswordRecoveryTable" Type="Self.UserPasswordRecoveryTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserPasswordRecoveryTable">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserTable_GenderTable">
           <End Role="GenderTable" Type="Self.GenderTable" Multiplicity="1" />
           <End Role="UserTable" Type="Self.UserTable" Multiplicity="*" />
@@ -645,6 +669,7 @@
           <EntitySet Name="TableReservationTable" EntityType="Self.TableReservationTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAddressTable" EntityType="Self.UserAddressTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetailTable" EntityType="Self.UserDetailTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPasswordRecoveryTable" EntityType="Self.UserPasswordRecoveryTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserStatusTable" EntityType="Self.UserStatusTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTable" EntityType="Self.UserTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTypeTable" EntityType="Self.UserTypeTable" Schema="dbo" store:Type="Tables" />
@@ -761,6 +786,10 @@
             <End Role="UserTable" EntitySet="UserTable" />
             <End Role="UserDetailTable" EntitySet="UserDetailTable" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserPasswordRecoveryTable_UserTable" Association="Self.FK_UserPasswordRecoveryTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="UserPasswordRecoveryTable" EntitySet="UserPasswordRecoveryTable" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserTable_GenderTable" Association="Self.FK_UserTable_GenderTable">
             <End Role="GenderTable" EntitySet="GenderTable" />
             <End Role="UserTable" EntitySet="UserTable" />
@@ -778,14 +807,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PizzaRestaurantAndDrinkDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AddressTypeTable">
-          <Key>
-            <PropertyRef Name="AddressTypeID" />
-          </Key>
-          <Property Name="AddressTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AddressType" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="UserAddressTables" Relationship="Self.FK_UserAddressTable_AddressTypeTable" FromRole="AddressTypeTable" ToRole="UserAddressTable" />
-        </EntityType>
         <EntityType Name="DiscountTable">
           <Key>
             <PropertyRef Name="DiscountID" />
@@ -1012,10 +1033,10 @@
           <Property Name="FullAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VisibleStatusID" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy_UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AddressTypeTable" Relationship="Self.FK_UserAddressTable_AddressTypeTable" FromRole="UserAddressTable" ToRole="AddressTypeTable" />
           <NavigationProperty Name="OrderTables" Relationship="Self.FK_OrderTable_UserAddressTable" FromRole="UserAddressTable" ToRole="OrderTable" />
           <NavigationProperty Name="UserTable" Relationship="Self.FK_UserAddressTable_UserTable" FromRole="UserAddressTable" ToRole="UserTable" />
           <NavigationProperty Name="VisibleStatusTable" Relationship="Self.FK_UserAddressTable_VisibleStatusTable" FromRole="UserAddressTable" ToRole="VisibleStatusTable" />
+          <NavigationProperty Name="AddressTypeTable" Relationship="PizzaRestaurantAndDrinkDbModel.FK_UserAddressTable_AddressTypeTable" FromRole="UserAddressTable" ToRole="AddressTypeTable" />
         </EntityType>
         <EntityType Name="UserStatusTable">
           <Key>
@@ -1049,6 +1070,7 @@
           <NavigationProperty Name="UserStatusTable" Relationship="Self.FK_UserTable_UserStatusTable" FromRole="UserTable" ToRole="UserStatusTable" />
           <NavigationProperty Name="UserTypeTable" Relationship="Self.FK_UserTable_UserTypeTable" FromRole="UserTable" ToRole="UserTypeTable" />
           <NavigationProperty Name="UserDetailTable" Relationship="PizzaRestaurantAndDrinkDbModel.FK_UserDetailTable_UserTable" FromRole="UserTable" ToRole="UserDetailTable" />
+          <NavigationProperty Name="UserPasswordRecoveryTables" Relationship="PizzaRestaurantAndDrinkDbModel.FK_UserPasswordRecoveryTable_UserTable" FromRole="UserTable" ToRole="UserPasswordRecoveryTable" />
         </EntityType>
         <EntityType Name="UserTypeTable">
           <Key>
@@ -1071,18 +1093,6 @@
           <NavigationProperty Name="StockMenuItemTables" Relationship="Self.FK_StockMenuItemTable_VisibleStatusTable" FromRole="VisibleStatusTable" ToRole="StockMenuItemTable" />
           <NavigationProperty Name="UserAddressTables" Relationship="Self.FK_UserAddressTable_VisibleStatusTable" FromRole="VisibleStatusTable" ToRole="UserAddressTable" />
         </EntityType>
-        <Association Name="FK_UserAddressTable_AddressTypeTable">
-          <End Role="AddressTypeTable" Type="Self.AddressTypeTable" Multiplicity="1" />
-          <End Role="UserAddressTable" Type="Self.UserAddressTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AddressTypeTable">
-              <PropertyRef Name="AddressTypeID" />
-            </Principal>
-            <Dependent Role="UserAddressTable">
-              <PropertyRef Name="AddressTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderItemDetailTable_DiscountTable">
           <End Role="DiscountTable" Type="Self.DiscountTable" Multiplicity="1" />
           <End Role="OrderItemDetailTable" Type="Self.OrderItemDetailTable" Multiplicity="*" />
@@ -1432,7 +1442,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PizzaRestaurantAndDrinkDbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AddressTypeTables" EntityType="Self.AddressTypeTable" />
           <EntitySet Name="DiscountTables" EntityType="Self.DiscountTable" />
           <EntitySet Name="GenderTables" EntityType="Self.GenderTable" />
           <EntitySet Name="OrderDealDetailTables" EntityType="Self.OrderDealDetailTable" />
@@ -1455,10 +1464,6 @@
           <EntitySet Name="UserTables" EntityType="Self.UserTable" />
           <EntitySet Name="UserTypeTables" EntityType="Self.UserTypeTable" />
           <EntitySet Name="VisibleStatusTables" EntityType="Self.VisibleStatusTable" />
-          <AssociationSet Name="FK_UserAddressTable_AddressTypeTable" Association="Self.FK_UserAddressTable_AddressTypeTable">
-            <End Role="AddressTypeTable" EntitySet="AddressTypeTables" />
-            <End Role="UserAddressTable" EntitySet="UserAddressTables" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderItemDetailTable_DiscountTable" Association="Self.FK_OrderItemDetailTable_DiscountTable">
             <End Role="DiscountTable" EntitySet="DiscountTables" />
             <End Role="OrderItemDetailTable" EntitySet="OrderItemDetailTables" />
@@ -1580,6 +1585,16 @@
             <End Role="UserTable" EntitySet="UserTables" />
             <End Role="UserDetailTable" EntitySet="UserDetailTables" />
           </AssociationSet>
+          <EntitySet Name="AddressTypeTables" EntityType="PizzaRestaurantAndDrinkDbModel.AddressTypeTable" />
+          <AssociationSet Name="FK_UserAddressTable_AddressTypeTable" Association="PizzaRestaurantAndDrinkDbModel.FK_UserAddressTable_AddressTypeTable">
+            <End Role="AddressTypeTable" EntitySet="AddressTypeTables" />
+            <End Role="UserAddressTable" EntitySet="UserAddressTables" />
+          </AssociationSet>
+          <EntitySet Name="UserPasswordRecoveryTables" EntityType="PizzaRestaurantAndDrinkDbModel.UserPasswordRecoveryTable" />
+          <AssociationSet Name="FK_UserPasswordRecoveryTable_UserTable" Association="PizzaRestaurantAndDrinkDbModel.FK_UserPasswordRecoveryTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="UserPasswordRecoveryTable" EntitySet="UserPasswordRecoveryTables" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="UserDetailTable">
           <Key>
@@ -1609,20 +1624,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AddressTypeTable">
+          <Key>
+            <PropertyRef Name="AddressTypeID" />
+          </Key>
+          <Property Name="AddressTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AddressType" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserAddressTables" Relationship="PizzaRestaurantAndDrinkDbModel.FK_UserAddressTable_AddressTypeTable" FromRole="AddressTypeTable" ToRole="UserAddressTable" />
+        </EntityType>
+        <Association Name="FK_UserAddressTable_AddressTypeTable">
+          <End Type="PizzaRestaurantAndDrinkDbModel.AddressTypeTable" Role="AddressTypeTable" Multiplicity="1" />
+          <End Type="PizzaRestaurantAndDrinkDbModel.UserAddressTable" Role="UserAddressTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddressTypeTable">
+              <PropertyRef Name="AddressTypeID" />
+            </Principal>
+            <Dependent Role="UserAddressTable">
+              <PropertyRef Name="AddressTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserPasswordRecoveryTable">
+          <Key>
+            <PropertyRef Name="UserPasswordRecoveryID" />
+          </Key>
+          <Property Name="UserPasswordRecoveryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RecoveryCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecoveryCodeExpiryDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RecoveryStatus" Type="Boolean" Nullable="false" />
+          <Property Name="OldPassword" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserTable" Relationship="PizzaRestaurantAndDrinkDbModel.FK_UserPasswordRecoveryTable_UserTable" FromRole="UserPasswordRecoveryTable" ToRole="UserTable" />
+        </EntityType>
+        <Association Name="FK_UserPasswordRecoveryTable_UserTable">
+          <End Type="PizzaRestaurantAndDrinkDbModel.UserTable" Role="UserTable" Multiplicity="1" />
+          <End Type="PizzaRestaurantAndDrinkDbModel.UserPasswordRecoveryTable" Role="UserPasswordRecoveryTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserPasswordRecoveryTable">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PizzaRestaurantAndDrinkDbModelStoreContainer" CdmEntityContainer="PizzaRestaurantAndDrinkDbEntities">
-          <EntitySetMapping Name="AddressTypeTables">
-            <EntityTypeMapping TypeName="PizzaRestaurantAndDrinkDbModel.AddressTypeTable">
-              <MappingFragment StoreEntitySet="AddressTypeTable">
-                <ScalarProperty Name="AddressTypeID" ColumnName="AddressTypeID" />
-                <ScalarProperty Name="AddressType" ColumnName="AddressType" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DiscountTables">
             <EntityTypeMapping TypeName="PizzaRestaurantAndDrinkDbModel.DiscountTable">
               <MappingFragment StoreEntitySet="DiscountTable">
@@ -1883,6 +1935,27 @@
                 <ScalarProperty Name="UserDetailProvideDate" ColumnName="UserDetailProvideDate" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserDetailID" ColumnName="UserDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddressTypeTables">
+            <EntityTypeMapping TypeName="PizzaRestaurantAndDrinkDbModel.AddressTypeTable">
+              <MappingFragment StoreEntitySet="AddressTypeTable">
+                <ScalarProperty Name="CreatedBy_UserID" ColumnName="CreatedBy_UserID" />
+                <ScalarProperty Name="AddressType" ColumnName="AddressType" />
+                <ScalarProperty Name="AddressTypeID" ColumnName="AddressTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPasswordRecoveryTables">
+            <EntityTypeMapping TypeName="PizzaRestaurantAndDrinkDbModel.UserPasswordRecoveryTable">
+              <MappingFragment StoreEntitySet="UserPasswordRecoveryTable">
+                <ScalarProperty Name="OldPassword" ColumnName="OldPassword" />
+                <ScalarProperty Name="RecoveryStatus" ColumnName="RecoveryStatus" />
+                <ScalarProperty Name="RecoveryCodeExpiryDateTime" ColumnName="RecoveryCodeExpiryDateTime" />
+                <ScalarProperty Name="RecoveryCode" ColumnName="RecoveryCode" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserPasswordRecoveryID" ColumnName="UserPasswordRecoveryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="22cad982aea44aabaf21338bec274872" Name="Diagram1">
-        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.AddressTypeTable" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.DiscountTable" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.GenderTable" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.OrderDealDetailTable" Width="1.5" PointX="10.5" PointY="9.75" IsExpanded="true" />
@@ -28,7 +27,6 @@
         <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.UserTable" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.UserTypeTable" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.VisibleStatusTable" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserAddressTable_AddressTypeTable" ManuallyRouted="false" />
         <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_OrderItemDetailTable_DiscountTable" ManuallyRouted="false" />
         <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserTable_GenderTable" ManuallyRouted="false" />
         <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_OrderDealDetailTable_OrderTable" ManuallyRouted="false" />
@@ -60,6 +58,10 @@
         <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserTable_UserTypeTable" ManuallyRouted="false" />
         <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.UserDetailTable" Width="1.5" PointX="5.25" PointY="28.375" />
         <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserDetailTable_UserTable" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.AddressTypeTable" Width="1.5" PointX="10.375" PointY="0.875" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserAddressTable_AddressTypeTable" />
+        <EntityTypeShape EntityType="PizzaRestaurantAndDrinkDbModel.UserPasswordRecoveryTable" Width="1.5" PointX="5.25" PointY="5.75" />
+        <AssociationConnector Association="PizzaRestaurantAndDrinkDbModel.FK_UserPasswordRecoveryTable_UserTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

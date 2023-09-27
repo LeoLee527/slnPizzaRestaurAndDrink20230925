@@ -71,19 +71,19 @@
                                 </ul>
                                 <!-- Header Social Start -->
                                 <ul class="list-inline float-right icon">
-                                    <li class="list-inline-item"><a href="shopping-cart.html"><i class="icofont icofont-cart-alt"></i> Cart</a></li>
+                                    <li class="list-inline-item"><a href="shopping-cart.html"><i class="icofont icofont-cart-alt"></i> 購物車</a></li>
                                     <li class="list-inline-item dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icofont icofont-ui-user"></i> My Account</a>
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icofont icofont-ui-user"></i> 會員中心</a>
                                         <ul class="dropdown-menu dropdown-menu-right drophover" aria-labelledby="dropdownMenuLink">
                                             @if (userid <= 0)
                                             {
-                                                <li class="dropdown-item"><a href="@Url.Content("~/User/Login")">Login</a></li>
-                                                <li class="dropdown-item"><a href="@Url.Content("~/User/Register")">Register</a></li>
+                                                <li class="dropdown-item"><a href="@Url.Content("~/User/Login")">登入</a></li>
+                                                <li class="dropdown-item"><a href="@Url.Content("~/User/Register")">註冊</a></li>
                                             }
                                             else
                                             {
-                                                <li class="dropdown-item"><a href="@Url.Content("~/User/Dashboard")">Dashboard</a></li>
-                                                <li class="dropdown-item"><a href="@Url.Content("~/User/Logout")">Logout</a></li>
+                                                <li class="dropdown-item"><a href="@Url.Content("~/User/Dashboard")">我的帳戶</a></li>
+                                                <li class="dropdown-item"><a href="@Url.Content("~/User/Logout")">登出</a></li>
                                             }
                                         </ul>
                                     </li>
@@ -128,17 +128,21 @@
                                             <li class="nav-item"><a href="@Url.Content("~/Home/Index")">HOME</a></li>
                                             <li class="nav-item"><a href="#">about us</a></li>
                                             <li class="nav-item"><a href="#">Our Menu</a></li>
-                                            @if (usertypeid == 1 || usertypeid == 3)
+                                            @if (userid > 0)
                                             {
                                                 <li class="nav-item dropdown">
                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setting</a>
                                                     <div class="dropdown-menu">
                                                         <div class="dropdown-inner">
                                                             <ul class="list-unstyled">
-                                                                <li><a href="@Url.Content("~/Setting/List_UserTypes")">User Types</a></li>
-                                                                <li><a href="@Url.Content("~/Setting/List_Genders")">Genders</a></li>
-                                                                <li><a href="@Url.Content("~/Setting/List_UserStatus")">Account Status</a></li>
-                                                                <li><a href="@Url.Content("~/Setting/List_VisibleStatus")">Record Visible Status</a></li>
+                                                                @if (usertypeid == 1 || usertypeid == 3) //Admin or Subadmin
+                                                                {
+                                                                    <li><a href="@Url.Content("~/Setting/List_UserTypes")">User Types</a></li>
+                                                                    <li><a href="@Url.Content("~/Setting/List_Genders")">Genders</a></li>
+                                                                    <li><a href="@Url.Content("~/Setting/List_UserStatus")">Account Status</a></li>
+                                                                    <li><a href="@Url.Content("~/Setting/List_VisibleStatus")">Record Visible Status</a></li>
+                                                                }
+                                                                <li><a href="@Url.Content("~/Setting/List_UserAddress")">User Address</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>

@@ -20,6 +20,7 @@ namespace prjPizzaRestaurAndDrink20230925.Models
             var user = db.UserTables.Find(id);
             ProfileMV.UserID = user.UserID;
             ProfileMV.UserType = user.UserTypeTable.UserType;
+            ProfileMV.UserTypeID = user.UserTypeID;
             ProfileMV.UserName = user.UserName;
             ProfileMV.Password = user.Password;
             ProfileMV.FirstName = user.FirstName;
@@ -45,8 +46,10 @@ namespace prjPizzaRestaurAndDrink20230925.Models
                 ProfileMV.EducationLastDegreePhotoPath = user.UserDetailTable.EducationLastDegreePhotoPath;
                 ProfileMV.ExperenceLastPhotoPath = user.UserDetailTable.ExperenceLastPhoto;
             }
+            GetUserAddress();
         }
         public virtual User_ProfileMV ProfileMV { get; set; }
+        public virtual List<UserAddressMV> UserAddress { get; set; }
 
         [DataType(DataType.Password)]
         public string OldPassword { get; set; }
@@ -56,5 +59,22 @@ namespace prjPizzaRestaurAndDrink20230925.Models
 
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
+
+
+        public void GetUserAddress()
+        {
+            UserAddress = new List<UserAddressMV>();
+            foreach (var address in db.UserAddressTables.Where(u => u.VisibleStatusID == 1).ToList())
+            {
+                UserAddress.Add(new UserAddressMV()
+                {
+                    UserAddressID = address.UserAddressID,
+                    AddressType = address.AddressTypeTable.AddressType,
+                    FullAddress = address.FullAddress,
+                    VisibleStatus = address.VisibleStatusTable.VisibleStatus,
+                    UserName = address.UserTable.UserName
+                });
+            }
+        }
     }
 }

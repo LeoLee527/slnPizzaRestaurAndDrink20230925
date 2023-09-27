@@ -21,6 +21,7 @@ namespace Dblayer
             this.TableReservationTables = new HashSet<TableReservationTable>();
             this.TableReservationTables1 = new HashSet<TableReservationTable>();
             this.UserAddressTables = new HashSet<UserAddressTable>();
+            this.UserPasswordRecoveryTables = new HashSet<UserPasswordRecoveryTable>();
         }
     
         public int UserID { get; set; }
@@ -48,5 +49,7 @@ namespace Dblayer
         public virtual UserStatusTable UserStatusTable { get; set; }
         public virtual UserTypeTable UserTypeTable { get; set; }
         public virtual UserDetailTable UserDetailTable { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserPasswordRecoveryTable> UserPasswordRecoveryTables { get; set; }
     }
 }
